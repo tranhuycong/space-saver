@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:SpaceSaver}",
+            "name": "Debug SpaceSaver",
+            "program": "${workspaceFolder:SpaceSaver}/.build/debug/SpaceSaver",
+            "preLaunchTask": "swift: Build Debug SpaceSaver"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:SpaceSaver}",
+            "name": "Release SpaceSaver",
+            "program": "${workspaceFolder:SpaceSaver}/.build/release/SpaceSaver",
+            "preLaunchTask": "swift: Build Release SpaceSaver"
+        }
+    ]
+}
