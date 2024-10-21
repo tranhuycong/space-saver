@@ -1,6 +1,12 @@
+//
+//  WindowInfo.swift
+//  SpaceSaver
+//
+//  Created by Tran Cong on 17/10/24.
+//
 import Foundation
 
-class WindowInfo: Identifiable {
+struct WindowInfo: Identifiable, Codable, Hashable {
     var id = UUID()
     var layer: Int
     var memoryUsage: Int

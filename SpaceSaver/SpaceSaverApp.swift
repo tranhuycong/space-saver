@@ -22,14 +22,13 @@ func requestAccessibilityPermissions() {
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        requestAccessibilityPermissions()
+//        requestAccessibilityPermissions()
     }
 }
 
 @main
 struct SpaceSaverApp: App {
     init() {
-        requestAccessibilityPermissions()
     }
 
     var body: some Scene {

@@ -5,46 +5,147 @@
 //  Created by Tran Cong on 7/10/24.
 //
 
+import AppKit
 import ApplicationServices
 import Cocoa
 import CoreGraphics
 import SwiftUI
 
 struct ContentView: View {
-    @State private var spaceInfoList: [WindowInfo] = []
+    @State private var spaceInfo: SpaceInfo = SpaceInfo.init(windowList: [])!
+    @State private var spaceList: SpaceList = SpaceList()
+    private var ignoreApps: [String] = ["SpaceSaver", "Finder"]
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("SpaceSaver need access to your screen to get space info")
-                .font(.title)
-                .multilineTextAlignment(.center)
-                .padding()
-            Button("Accessibility settings") {
-                NSWorkspace.shared.open(
-                    URL(
-                        string:
-                            "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
-                    )!)
-            }
-            Button("Open app") {
-                openAppAndPosition()
-            }
-            Button("Get Space Info") {
-                getAllOpenWindows()
-            }
-            List(spaceInfoList) { windowInfo in
-                VStack(alignment: .leading) {
-                    Text("Owner: \(windowInfo.ownerName)")
-                    Text("PID: \(windowInfo.ownerPID)")
-                    Text("Memory Usage: \(windowInfo.memoryUsage) KB")
-                    Text("Bounds: \(windowInfo.bounds)")
+        ScrollView {
+            VStack {
+                Text("Spaces:")
+                    .font(.title)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 10)
+                Button("Open Terminal") {
+                    openAppAtPosition(
+                        appName: "Terminal",
+                        bounds: [0, 0, 500, 500])
                 }
-                .padding()
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(spaceList.data) { item in
+                            VStack {
+                                Text("\(item.name)")
+                                    .padding(10)
+                                Divider()
+                                ScrollView {
+                                    VStack {
+                                        ForEach(item.windowList) { windowInfo in
+                                            Text("\(windowInfo.ownerName)")
+                                                .frame(
+                                                    maxWidth: .infinity,
+                                                    alignment: .leading
+                                                )
+                                                .padding(.horizontal, 10)
+                                        }
+                                    }
+                                    .padding(.vertical, 10)
+                                }.frame(height: 100)
+                                Divider()
+                                HStack {
+                                    Button("Open") {
+                                        openSpace(
+                                            at: spaceList.data.firstIndex {
+                                                $0.id == item.id
+                                            }!)
+                                    }
+                                    Spacer()
+                                    Button(action: {
+                                        let index = spaceList.data.firstIndex {
+                                            $0.id == item.id
+                                        }
+                                        if index != nil {
+                                            deleteSpace(at: index!)
+                                        }
+                                    }) {
+                                        Image(systemName: "trash")
+                                            .foregroundColor(.red)
+                                    }
+                                }.padding(.horizontal, 10)
+                                    .padding(.vertical, 5)
+                            }.frame(width: 150, height: 200)
+                                .background(
+                                    Color(NSColor.controlBackgroundColor)
+                                        .cornerRadius(10)
+                                )
+                                .cornerRadius(10)
+                                .padding(10)
+                        }
+                    }
+                }
+                Divider()
+                HStack {
+                    Text("Opening apps on this space:")
+                    Spacer()
+                    Button(action: {
+                        getAllOpenWindows()
+                    }) {
+                        Image(
+                            systemName:
+                                "arrow.trianglehead.2.clockwise.rotate.90")
+                    }
+                    Button("Close all apps") {
+                        let listOpenApp = spaceInfo.windowList.map { $0.ownerName }
+                        for app in listOpenApp {
+                            if !ignoreApps.contains(app) {
+                                NSAppleScript(
+                                    source: """
+                                        tell application "\(app)"
+                                            quit
+                                        end tell
+                                        """
+                                )?.executeAndReturnError(nil)
+                            }
+                        }
+                    }
+                    Button("Save space") {
+                        saveToSpaceList()
+                    }
+                }.padding(.top, 10)
+                List(spaceInfo.windowList) { windowInfo in
+                    Text("\(windowInfo.ownerName)")
+                        .padding(5)
+                }
+                .frame(minHeight: 100)
+            }
+            .padding()
+            .onAppear {
+                getAllOpenWindows()
+                getSpaceList()
             }
         }
-        .padding()
+    }
+
+    func openSpace(at index: Int) {
+        let space = spaceList.data[index]
+        for window in space.windowList {
+            if !ignoreApps.contains(window.ownerName) {
+                let bounds = [
+                    window.bounds.origin.x,
+                    window.bounds.origin.y,
+                    window.bounds.origin.x + window.bounds.size.width,
+                    window.bounds.origin.y + window.bounds.size.height,
+                ]
+                openAppAtPosition(
+                    appName: window.ownerName,
+                    bounds: bounds)
+            }
+        }
+    }
+
+    func deleteSpace(at index: Int) {
+        spaceList.data.remove(at: index)
+        UserDefaultsHelper.spaceList = spaceList
+    }
+
+    func getSpaceList() {
+        spaceList = UserDefaultsHelper.spaceList
     }
 
     func getAllOpenWindows() {
@@ -54,46 +155,96 @@ struct ContentView: View {
         let infoList = windowsListInfo as! [[String: Any]]
         let visibleWindows = infoList.filter {
             $0["kCGWindowLayer"] as! Int == 0
+                && ignoreApps.contains($0["kCGWindowOwnerName"] as! String) == false
         }
-
         print(visibleWindows)
-        spaceInfoList = visibleWindows.compactMap(WindowInfo.init)
+
+        spaceInfo = SpaceInfo(
+            windowList: visibleWindows.compactMap(WindowInfo.init))!
     }
 
-    func openAppAndPosition() {
-        let url =
-            NSURL(
-                fileURLWithPath: "/System/Applications/Utilities/Terminal.app",
-                isDirectory: true)
-            as URL
-
-        let path = "/bin"
-        let configuration = NSWorkspace.OpenConfiguration()
-        configuration.arguments = [path]
-        configuration.createsNewApplicationInstance = true
-        NSWorkspace.shared.openApplication(
-            at: url,
-            configuration: configuration,
-            completionHandler: nil)
+    func saveToSpaceList() {
+        spaceList.data.insert(spaceInfo, at: 0)
+        UserDefaultsHelper.spaceList = spaceList
     }
-}
 
-extension Array {
-    static func fromCFArray(records: CFArray?) -> [Element]? {
-        var result: [Element]?
-        if let records = records {
-            for i in 0..<CFArrayGetCount(records) {
-                let unmanagedObject: UnsafeRawPointer = CFArrayGetValueAtIndex(
-                    records, i)
-                let rec: Element = unsafeBitCast(
-                    unmanagedObject, to: Element.self)
-                if result == nil {
-                    result = [Element]()
-                }
-                result!.append(rec)
+    func openAppAtPosition(appName: String, bounds: [CGFloat]) {
+        print("Open \(appName) at \(bounds)")
+
+        if let bundleIdentifier = getBundleIdentifier(forAppName: appName) {
+            print("Bundle Identifier: \(bundleIdentifier)")
+            if let appURL = NSWorkspace.shared.urlForApplication(
+                withBundleIdentifier: bundleIdentifier)
+            {
+                let appPath = appURL.path
+                let url =
+                    NSURL(
+                        fileURLWithPath: appPath,
+                        isDirectory: true)
+                    as URL
+
+                let configuration = NSWorkspace.OpenConfiguration()
+                configuration.arguments = []
+                configuration.createsNewApplicationInstance = true
+                configuration.environment = [
+                    "NSWindowFrame": "\(bounds[0]) \(bounds[1]) \(bounds[2]) \(bounds[3])"
+                ]
+                NSWorkspace.shared.openApplication(
+                    at: url,
+                    configuration: configuration,
+                    completionHandler: { (app, error) in
+                        if error == nil {
+                            let appleScript = """
+                                tell application "\(appName)"
+                                    set the bounds of the first window to {\(bounds[0]), \(bounds[1]), \(bounds[2]), \(bounds[3])}
+                                end tell
+                                """
+                            var error: NSDictionary?
+                            if let scriptObject = NSAppleScript(source: appleScript) {
+                                scriptObject.executeAndReturnError(&error)
+                                if let error = error {
+                                    print("AppleScript Error: \(error)")
+                                }
+                            }
+                        } else {
+                            print("Error launching application: \(String(describing: error))")
+                        }
+                    })
             }
         }
-        return result
+    }
+
+    func getBundleIdentifier(forAppName appName: String) -> String? {
+        let fileManager = FileManager.default
+        let applicationPaths = [
+            "/Applications",
+            "/System/Applications",
+            "/System/Applications/Utilities",
+            "\(fileManager.homeDirectoryForCurrentUser.path)/Applications",
+            "/System/Library/CoreServices",
+        ]
+
+        for path in applicationPaths {
+            if let appURLs = try? fileManager.contentsOfDirectory(
+                at: URL(fileURLWithPath: path), includingPropertiesForKeys: nil,
+                options: .skipsHiddenFiles)
+            {
+                for appURL in appURLs where appURL.pathExtension == "app" {
+                    let bundle = Bundle(url: appURL)
+                    if let name = bundle?.object(forInfoDictionaryKey: "CFBundleName") as? String,
+                        name == appName
+                    {
+                        return bundle?.bundleIdentifier
+                    } else if let displayName = bundle?.object(
+                        forInfoDictionaryKey: "CFBundleDisplayName") as? String,
+                        displayName == appName
+                    {
+                        return bundle?.bundleIdentifier
+                    }
+                }
+            }
+        }
+        return nil
     }
 }
 
