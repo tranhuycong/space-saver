@@ -1,6 +1,16 @@
+![SpaceSaver Logo](docs/mac256.png)
+
 # SpaceSaver
 
 SpaceSaver is a macOS application designed to help you manage your desktop spaces efficiently. With SpaceSaver, you can save the state of your open applications and windows, and easily restore them later. This is particularly useful for users who work with multiple applications and need to quickly switch between different workspaces.
+
+## Screenshots
+
+![SpaceSaver Main Screen](docs/Screenshot%202024-11-08%20at%2016.35.18.png)
+
+## Preview
+
+![SpaceSaver Preview](docs/SpaceSaver%202024-11-08%20at%2016.32.07.gif)
 
 ## Features
 
@@ -10,7 +20,7 @@ SpaceSaver is a macOS application designed to help you manage your desktop space
 
 ## Installation
 
-1. **Download the App**: [Download SpaceSaver](#) (link to the app's download page or GitHub releases)
+1. **Download the App**: [Download SpaceSaver](https://github.com/tranhuycong/space-saver/releases/download/v1.0.1/Space-Saver-Installer-v1.0.1.dmg)
 2. **Open the App**: Locate the downloaded file and open it to start the installation process.
 3. **Follow the Instructions**: Follow the on-screen instructions to complete the installation.
 
@@ -22,15 +32,9 @@ SpaceSaver is a macOS application designed to help you manage your desktop space
 3. **Restore Workspace**:
    - Select a saved workspace from the list and click "Restore" to reopen the saved applications and windows.
 
-## Screenshots
-
-![SpaceSaver Main Screen](#) (link to screenshot)
-![Save Workspace](#) (link to screenshot)
-![Restore Workspace](#) (link to screenshot)
-
 ## Contributing
 
-We welcome contributions to improve SpaceSaver. If you have any suggestions or find any issues, please open an issue or submit a pull request on our [GitHub repository](#) (link to GitHub repository).
+We welcome contributions to improve SpaceSaver. If you have any suggestions or find any issues, please open an issue or submit a pull request on our [GitHub repository](https://github.com/tranhuycong/space-saver).
 
 ## License
 
@@ -38,7 +42,7 @@ This project is licensed under the MIT License. See the LICENSE (link to LICENSE
 
 ## Contact
 
-For any questions or support, please contact us at [support@spacesaver.com](mailto:support@spacesaver.com).
+For any questions or support, please contact us at [congtranit@gmail.com](mailto:congtranit@gmail.com).
 
 ---
 
