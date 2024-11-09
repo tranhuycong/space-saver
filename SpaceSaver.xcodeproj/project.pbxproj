@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F8C646522CDF6F1900D1FBE3 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F8C646512CDF6F1900D1FBE3 /* Sparkle */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		F895F7012CB3D573001C4932 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8C646522CDF6F1900D1FBE3 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = SpaceSaver;
 			packageProductDependencies = (
+				F8C646512CDF6F1900D1FBE3 /* Sparkle */,
 			);
 			productName = SpaceSaver;
 			productReference = F895F6EF2CB3D571001C4932 /* SpaceSaver.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = F895F6E62CB3D571001C4932;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F8C646502CDF6F1800D1FBE3 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F895F6F02CB3D571001C4932 /* Products */;
 			projectDirPath = "";
@@ -397,7 +406,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"SpaceSaver/Preview Content\"";
 				DEVELOPMENT_TEAM = TH9FL7J7ZY;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -412,7 +421,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.congth504.spacesaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -430,7 +439,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"SpaceSaver/Preview Content\"";
 				DEVELOPMENT_TEAM = TH9FL7J7ZY;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -445,7 +454,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.congth504.spacesaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -561,6 +570,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F8C646502CDF6F1800D1FBE3 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F8C646512CDF6F1900D1FBE3 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8C646502CDF6F1800D1FBE3 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F895F6E72CB3D571001C4932 /* Project object */;
 }

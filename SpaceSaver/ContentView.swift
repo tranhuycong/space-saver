@@ -35,6 +35,13 @@ struct ContentView: View {
                                 NSWorkspace.shared.open(url)
                             }
                         }
+                        Button("Release page") {
+                            if let url = URL(
+                                string: "https://github.com/tranhuycong/space-saver/releases/")
+                            {
+                                NSWorkspace.shared.open(url)
+                            }
+                        }
                         Button("Quit") {
                             NSApplication.shared.terminate(self)
                         }
@@ -72,8 +79,40 @@ struct ContentView: View {
                     HStack {
                         ForEach(spaceList.data) { item in
                             VStack {
-                                Text("\(item.name)")
-                                    .padding(10)
+                                ScrollView(.vertical) {
+                                    HStack {
+                                        Text("\(item.name)")
+                                            .padding(10)
+                                            .fixedSize(horizontal: false, vertical: true)
+                                        Button(action: {
+                                            let alert = NSAlert()
+                                            alert.messageText = "Edit Space Name"
+                                            alert.informativeText =
+                                                "Enter a new name for the space:"
+                                            alert.alertStyle = .informational
+                                            alert.addButton(withTitle: "OK")
+                                            alert.addButton(withTitle: "Cancel")
+
+                                            let inputTextField = NSTextField(
+                                                frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+                                            inputTextField.stringValue = item.name
+                                            alert.accessoryView = inputTextField
+
+                                            let response = alert.runModal()
+                                            if response == .alertFirstButtonReturn {
+                                                let newName = inputTextField.stringValue
+                                                if let index = spaceList.data.firstIndex(where: {
+                                                    $0.id == item.id
+                                                }) {
+                                                    spaceList.data[index].name = newName
+                                                    UserDefaultsHelper.spaceList = spaceList
+                                                }
+                                            }
+                                        }) {
+                                            Image(systemName: "pencil")
+                                        }
+                                    }
+                                }.frame(height: 40)
                                 Divider()
                                 ScrollView {
                                     VStack {

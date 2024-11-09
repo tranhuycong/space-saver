@@ -24,7 +24,7 @@ SpaceSaver is a macOS application designed to help you manage your desktop space
 
 ## Installation
 
-1. **Download the App**: [Download SpaceSaver](https://github.com/tranhuycong/space-saver/releases/download/v1.0.1/Space-Saver-Installer-v1.0.1.dmg)
+1. **Download the App**: [Download SpaceSaver](https://github.com/tranhuycong/space-saver/releases/download/v1.0.2/SpaceSaver-Installer.dmg)
 2. **Open the App**: Locate the downloaded file and open it to start the installation process.
 3. **Follow the Instructions**: Follow the on-screen instructions to complete the installation.
 4. **All Releases**: [All release versions](https://github.com/tranhuycong/space-saver/releases/)

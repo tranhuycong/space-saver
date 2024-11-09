@@ -5,11 +5,15 @@
 //  Created by Tran Cong on 7/10/24.
 //
 
+import Cocoa
+import Sparkle
 import SwiftUI
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     var statusItem: NSStatusItem?
-    
+    let updaterController = SPUStandardUpdaterController(
+        startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         if let button = statusItem?.button {
@@ -18,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.action = #selector(statusBarButtonClicked)
         }
     }
-    
+
     @objc func statusBarButtonClicked() {
         let contentView = ContentView()
         let popover = NSPopover()
@@ -30,6 +34,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             preferredEdge: NSRectEdge.minY)
 
     }
+
+    func applicationWillTerminate(_ aNotification: Notification) {
+    }
+
 }
 
 @main
