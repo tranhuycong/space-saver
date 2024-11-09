@@ -12,6 +12,10 @@ SpaceSaver is a macOS application designed to help you manage your desktop space
 
 ![SpaceSaver Preview](docs/SpaceSaver%202024-11-08%20at%2016.32.07.gif)
 
+## Video
+
+[Watch the demo video](docs/Screen%20Recording%202024-11-08%20at%2011.36.52.mov)
+
 ## Features
 
 - **Save Workspace State**: Save the current state of all open applications and windows.
