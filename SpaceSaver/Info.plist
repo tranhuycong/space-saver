@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSBackgroundOnly</key>
+	<true/>
 	<key>SUPublicEDKey</key>
 	<string>hv0tfLcaGNlqbBXG3eCAMqPv16V8bByIRMrSCYbZA5E=</string>
 	<key>SUEnableInstallerLauncherService</key>

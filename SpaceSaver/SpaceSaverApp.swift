@@ -10,42 +10,71 @@ import Sparkle
 import SwiftUI
 
 class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
-    var statusItem: NSStatusItem?
-    let updaterController = SPUStandardUpdaterController(
-        startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
 
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        if let button = statusItem?.button {
-            button.image = NSImage(
-                systemSymbolName: "rectangle.3.group.fill", accessibilityDescription: "Space Saver")
-            button.action = #selector(statusBarButtonClicked)
-        }
-    }
+	var window: NSWindow?
+	var statusItem: NSStatusItem?
+	let updaterController = SPUStandardUpdaterController(
+		startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
 
-    @objc func statusBarButtonClicked() {
-        let contentView = ContentView()
-        let popover = NSPopover()
-        popover.contentSize = NSSize(width: 600, height: 500)
-        popover.behavior = .transient
-        popover.contentViewController = NSHostingController(rootView: contentView)
-        popover.show(
-            relativeTo: statusItem!.button!.bounds, of: statusItem!.button!,
-            preferredEdge: NSRectEdge.minY)
+	func applicationDidFinishLaunching(_ notification: Notification) {
+		statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+		if let button = statusItem?.button {
+			button.image = NSImage(
+				systemSymbolName: "rectangle.3.group.fill", accessibilityDescription: "Space Saver")
+		}
+		constructMenu()
+	}
 
-    }
+	func constructMenu() {
+		let menu = NSMenu()
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-    }
+		menu.addItem(NSMenuItem(title: "Open", action: #selector(openAction), keyEquivalent: "O"))
+		menu.addItem(NSMenuItem.separator())
+		menu.addItem(NSMenuItem(title: "Quit", action: #selector(quitAction), keyEquivalent: "Q"))
+
+		statusItem?.menu = menu
+	}
+
+	@objc func openAction() {
+		// Create window if it doesn't exist
+		if window == nil {
+			window = NSWindow(
+				contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
+				styleMask: [.titled, .closable, .miniaturizable, .resizable],
+				backing: .buffered,
+				defer: false
+			)
+			window?.center()
+			window?.contentView = NSHostingView(rootView: ContentView())
+			window?.title = "Space Saver"
+		}
+
+		// Make app active and show window
+		NSApp.setActivationPolicy(.regular)
+		NSApp.activate(ignoringOtherApps: true)
+		window?.makeKeyAndOrderFront(nil)
+	}
+
+	@objc func quitAction() {
+		NSApplication.shared.terminate(self)
+	}
+
+	func applicationWillTerminate(_ aNotification: Notification) {
+	}
+
+	func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+		NSApp.setActivationPolicy(.accessory)
+		return false
+	}
 
 }
 
 @main
 struct SpaceSaverApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+	var body: some Scene {
+		WindowGroup {
+			ContentView()
+		}
+	}
 }

@@ -23,6 +23,7 @@ struct UserDefaultsHelper {
         set {
             do {
                 let encoded = try JSONEncoder().encode(newValue)
+                print("Encoded SpaceList size: \(Double(encoded.count) / 1_000_000.0) MB")
                 UserDefaults.standard.set(encoded, forKey: "spaceList")
             } catch {
                 print("Failed to encode SpaceList: \(error)")
