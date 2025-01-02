@@ -8,6 +8,7 @@
 import Cocoa
 import Sparkle
 import SwiftUI
+import FirebaseCore
 
 class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
@@ -17,6 +18,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 		startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
+
+		// Add firebase configuration
+		FirebaseApp.configure()
+
 		statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 		if let button = statusItem?.button {
 			button.image = NSImage(
