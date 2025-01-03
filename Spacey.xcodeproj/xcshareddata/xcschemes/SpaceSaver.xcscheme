@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F895F6EE2CB3D571001C4932"
-               BuildableName = "SpaceSaver.app"
-               BlueprintName = "SpaceSaver"
-               ReferencedContainer = "container:SpaceSaver.xcodeproj">
+               BuildableName = "Spacey.app"
+               BlueprintName = "Spacey"
+               ReferencedContainer = "container:Spacey.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,9 +36,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F895F6FF2CB3D573001C4932"
-               BuildableName = "SpaceSaverTests.xctest"
-               BlueprintName = "SpaceSaverTests"
-               ReferencedContainer = "container:SpaceSaver.xcodeproj">
+               BuildableName = "SpaceyTests.xctest"
+               BlueprintName = "SpaceyTests"
+               ReferencedContainer = "container:Spacey.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F895F7092CB3D573001C4932"
-               BuildableName = "SpaceSaverUITests.xctest"
-               BlueprintName = "SpaceSaverUITests"
-               ReferencedContainer = "container:SpaceSaver.xcodeproj">
+               BuildableName = "SpaceyUITests.xctest"
+               BlueprintName = "SpaceyUITests"
+               ReferencedContainer = "container:Spacey.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -69,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F895F6EE2CB3D571001C4932"
-            BuildableName = "SpaceSaver.app"
-            BlueprintName = "SpaceSaver"
-            ReferencedContainer = "container:SpaceSaver.xcodeproj">
+            BuildableName = "Spacey.app"
+            BlueprintName = "Spacey"
+            ReferencedContainer = "container:Spacey.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -86,9 +86,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F895F6EE2CB3D571001C4932"
-            BuildableName = "SpaceSaver.app"
-            BlueprintName = "SpaceSaver"
-            ReferencedContainer = "container:SpaceSaver.xcodeproj">
+            BuildableName = "Spacey.app"
+            BlueprintName = "Spacey"
+            ReferencedContainer = "container:Spacey.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

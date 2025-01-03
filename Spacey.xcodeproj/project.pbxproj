@@ -29,9 +29,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F895F6EF2CB3D571001C4932 /* SpaceSaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceSaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F895F7002CB3D573001C4932 /* SpaceSaverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceSaverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F895F70A2CB3D573001C4932 /* SpaceSaverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceSaverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F895F6EF2CB3D571001C4932 /* Spacey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spacey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F895F7002CB3D573001C4932 /* SpaceyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F895F70A2CB3D573001C4932 /* SpaceyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -92,9 +92,9 @@
 		F895F6F02CB3D571001C4932 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F895F6EF2CB3D571001C4932 /* SpaceSaver.app */,
-				F895F7002CB3D573001C4932 /* SpaceSaverTests.xctest */,
-				F895F70A2CB3D573001C4932 /* SpaceSaverUITests.xctest */,
+				F895F6EF2CB3D571001C4932 /* Spacey.app */,
+				F895F7002CB3D573001C4932 /* SpaceyTests.xctest */,
+				F895F70A2CB3D573001C4932 /* SpaceyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,9 +102,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F895F6EE2CB3D571001C4932 /* SpaceSaver */ = {
+		F895F6EE2CB3D571001C4932 /* Spacey */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F895F7142CB3D573001C4932 /* Build configuration list for PBXNativeTarget "SpaceSaver" */;
+			buildConfigurationList = F895F7142CB3D573001C4932 /* Build configuration list for PBXNativeTarget "Spacey" */;
 			buildPhases = (
 				F895F6EB2CB3D571001C4932 /* Sources */,
 				F895F6EC2CB3D571001C4932 /* Frameworks */,
@@ -117,18 +117,18 @@
 			fileSystemSynchronizedGroups = (
 				F895F6F12CB3D571001C4932 /* SpaceSaver */,
 			);
-			name = SpaceSaver;
+			name = Spacey;
 			packageProductDependencies = (
 				F8C646512CDF6F1900D1FBE3 /* Sparkle */,
 				F81ADCB12D23A97B00650FFE /* FirebaseAnalytics */,
 			);
 			productName = SpaceSaver;
-			productReference = F895F6EF2CB3D571001C4932 /* SpaceSaver.app */;
+			productReference = F895F6EF2CB3D571001C4932 /* Spacey.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F895F6FF2CB3D573001C4932 /* SpaceSaverTests */ = {
+		F895F6FF2CB3D573001C4932 /* SpaceyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F895F7172CB3D573001C4932 /* Build configuration list for PBXNativeTarget "SpaceSaverTests" */;
+			buildConfigurationList = F895F7172CB3D573001C4932 /* Build configuration list for PBXNativeTarget "SpaceyTests" */;
 			buildPhases = (
 				F895F6FC2CB3D573001C4932 /* Sources */,
 				F895F6FD2CB3D573001C4932 /* Frameworks */,
@@ -142,16 +142,16 @@
 			fileSystemSynchronizedGroups = (
 				F895F7032CB3D573001C4932 /* SpaceSaverTests */,
 			);
-			name = SpaceSaverTests;
+			name = SpaceyTests;
 			packageProductDependencies = (
 			);
 			productName = SpaceSaverTests;
-			productReference = F895F7002CB3D573001C4932 /* SpaceSaverTests.xctest */;
+			productReference = F895F7002CB3D573001C4932 /* SpaceyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F895F7092CB3D573001C4932 /* SpaceSaverUITests */ = {
+		F895F7092CB3D573001C4932 /* SpaceyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F895F71A2CB3D573001C4932 /* Build configuration list for PBXNativeTarget "SpaceSaverUITests" */;
+			buildConfigurationList = F895F71A2CB3D573001C4932 /* Build configuration list for PBXNativeTarget "SpaceyUITests" */;
 			buildPhases = (
 				F895F7062CB3D573001C4932 /* Sources */,
 				F895F7072CB3D573001C4932 /* Frameworks */,
@@ -165,11 +165,11 @@
 			fileSystemSynchronizedGroups = (
 				F895F70D2CB3D573001C4932 /* SpaceSaverUITests */,
 			);
-			name = SpaceSaverUITests;
+			name = SpaceyUITests;
 			packageProductDependencies = (
 			);
 			productName = SpaceSaverUITests;
-			productReference = F895F70A2CB3D573001C4932 /* SpaceSaverUITests.xctest */;
+			productReference = F895F70A2CB3D573001C4932 /* SpaceyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -195,7 +195,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F895F6EA2CB3D571001C4932 /* Build configuration list for PBXProject "SpaceSaver" */;
+			buildConfigurationList = F895F6EA2CB3D571001C4932 /* Build configuration list for PBXProject "Spacey" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -213,9 +213,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F895F6EE2CB3D571001C4932 /* SpaceSaver */,
-				F895F6FF2CB3D573001C4932 /* SpaceSaverTests */,
-				F895F7092CB3D573001C4932 /* SpaceSaverUITests */,
+				F895F6EE2CB3D571001C4932 /* Spacey */,
+				F895F6FF2CB3D573001C4932 /* SpaceyTests */,
+				F895F7092CB3D573001C4932 /* SpaceyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -271,12 +271,12 @@
 /* Begin PBXTargetDependency section */
 		F895F7022CB3D573001C4932 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F895F6EE2CB3D571001C4932 /* SpaceSaver */;
+			target = F895F6EE2CB3D571001C4932 /* Spacey */;
 			targetProxy = F895F7012CB3D573001C4932 /* PBXContainerItemProxy */;
 		};
 		F895F70C2CB3D573001C4932 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F895F6EE2CB3D571001C4932 /* SpaceSaver */;
+			target = F895F6EE2CB3D571001C4932 /* Spacey */;
 			targetProxy = F895F70B2CB3D573001C4932 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -480,7 +480,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceSaver.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpaceSaver";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spacey.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Spacey";
 			};
 			name = Debug;
 		};
@@ -498,7 +498,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceSaver.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpaceSaver";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spacey.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Spacey";
 			};
 			name = Release;
 		};
@@ -537,7 +537,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F895F6EA2CB3D571001C4932 /* Build configuration list for PBXProject "SpaceSaver" */ = {
+		F895F6EA2CB3D571001C4932 /* Build configuration list for PBXProject "Spacey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F895F7122CB3D573001C4932 /* Debug */,
@@ -546,7 +546,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F895F7142CB3D573001C4932 /* Build configuration list for PBXNativeTarget "SpaceSaver" */ = {
+		F895F7142CB3D573001C4932 /* Build configuration list for PBXNativeTarget "Spacey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F895F7152CB3D573001C4932 /* Debug */,
@@ -555,7 +555,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F895F7172CB3D573001C4932 /* Build configuration list for PBXNativeTarget "SpaceSaverTests" */ = {
+		F895F7172CB3D573001C4932 /* Build configuration list for PBXNativeTarget "SpaceyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F895F7182CB3D573001C4932 /* Debug */,
@@ -564,7 +564,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F895F71A2CB3D573001C4932 /* Build configuration list for PBXNativeTarget "SpaceSaverUITests" */ = {
+		F895F71A2CB3D573001C4932 /* Build configuration list for PBXNativeTarget "SpaceyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F895F71B2CB3D573001C4932 /* Debug */,

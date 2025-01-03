@@ -1,6 +1,6 @@
 //
-//  SpaceSaverApp.swift
-//  SpaceSaver
+//  SpaceyApp.swift
+//  Spacey
 //
 //  Created by Tran Cong on 7/10/24.
 //
@@ -78,7 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 }
 
 @main
-struct SpaceSaverApp: App {
+struct SpaceyApp: App {
 	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 	var body: some Scene {
 		WindowGroup {

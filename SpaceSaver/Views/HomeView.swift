@@ -6,7 +6,6 @@ struct HomeView: View {
   var body: some View {
     ScrollView {
       VStack {
-        HeaderView()
         if !AXIsProcessTrusted() {
           HStack {
             Text(
@@ -26,97 +25,7 @@ struct HomeView: View {
           }
         }
         Divider()
-        Text("Saved Spaces: ")
-          .font(.headline)
-          .frame(maxWidth: .infinity, alignment: .leading)
-          .padding(.leading, 10)
-        ScrollView(.horizontal) {
-          HStack {
-            ForEach(appService.spaceList.data) { item in
-              VStack {
-                ScrollView(.vertical) {
-                  HStack {
-                    Text("\(item.name)")
-                      .padding(10)
-                      .fixedSize(horizontal: false, vertical: true)
-                    Button(action: {
-                      let alert = NSAlert()
-                      alert.messageText = "Edit Space Name"
-                      alert.informativeText =
-                        "Enter a new name for the space:"
-                      alert.alertStyle = .informational
-                      alert.addButton(withTitle: "OK")
-                      alert.addButton(withTitle: "Cancel")
-
-                      let inputTextField = NSTextField(
-                        frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-                      inputTextField.stringValue = item.name
-                      alert.accessoryView = inputTextField
-
-                      let response = alert.runModal()
-                      if response == .alertFirstButtonReturn {
-                        let newName = inputTextField.stringValue
-                        if let index = appService.spaceList.data.firstIndex(where: {
-                          $0.id == item.id
-                        }) {
-                          appService.spaceList.data[index].name = newName
-                          UserDefaultsHelper.spaceList = appService.spaceList
-                        }
-                      }
-                    }) {
-                      Image(systemName: "pencil")
-                    }
-                  }
-                }.frame(height: 40)
-                Divider()
-                ScrollView {
-                  VStack {
-                    ForEach(item.windowList) { windowInfo in
-                      Text("\(windowInfo.ownerName)")
-                        .frame(
-                          maxWidth: .infinity,
-                          alignment: .leading
-                        )
-                        .padding(.horizontal, 10)
-                    }
-                  }
-                  .padding(.vertical, 10)
-                }.frame(height: 100)
-                Divider()
-                HStack {
-                  Button("Open") {
-                    appService.openSpace(
-                      at: appService.spaceList.data.firstIndex {
-                        $0.id == item.id
-                      }!)
-                  }
-                  Spacer()
-                  Button(action: {
-                    let index = appService.spaceList.data.firstIndex {
-                      $0.id == item.id
-                    }
-                    if index != nil {
-                      appService.deleteSpace(at: index!)
-                    }
-                  }) {
-                    Image(systemName: "trash")
-                      .foregroundColor(.red)
-                  }
-                }.padding(.horizontal, 10)
-                  .padding(.vertical, 5)
-              }.frame(width: 150, height: 200)
-                .background(
-                  Color(NSColor.controlBackgroundColor)
-                    .cornerRadius(10)
-                )
-                .cornerRadius(10)
-                .padding(10)
-            }
-          }
-        }
-        Divider()
         HStack {
-          Text("Opening apps on this space:")
           Spacer()
           Button(action: {
             appService.getAllOpenWindows()
@@ -125,7 +34,7 @@ struct HomeView: View {
               systemName:
                 "arrow.trianglehead.2.clockwise.rotate.90")
           }
-          Button("Close apps on this space") {
+          Button("Close apps below") {
             appService.getAllOpenWindows()
             let listOpenApp = appService.spaceInfo.windowList.map { $0.ownerName }
             for app in listOpenApp {

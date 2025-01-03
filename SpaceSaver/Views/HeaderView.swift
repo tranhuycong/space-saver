@@ -3,7 +3,7 @@ import SwiftUI
 struct HeaderView: View {
   var body: some View {
     HStack {
-      Text("Space Saver")
+      Text("Spacey")
         .font(.headline)
       Spacer()
       Menu {

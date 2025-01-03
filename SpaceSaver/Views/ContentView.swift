@@ -17,6 +17,7 @@ struct ContentView: View {
 
   @StateObject private var appService = AppService.shared
   @State private var selectedItem: NavigationItem? = .home
+  @State private var spaceToDelete: SpaceInfo? = nil
 
   var body: some View {
     NavigationSplitView {
@@ -30,8 +31,29 @@ struct ContentView: View {
         Section(header: Text("Saved Spaces")) {
           ForEach(appService.spaceList.data, id: \.self) { space in
             NavigationLink(value: NavigationItem.space(space)) {
-              Text(space.name)
+              HStack {
+                SpacePreview(space: space)
+                  .scaledToFit()
+                  .cornerRadius(4)
+                  .frame(width: 150)
+                
+                Text(space.name)
+                .foregroundColor(.white)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                
+                Spacer()
+                
+                Image(systemName: "trash")
+                  .foregroundColor(.gray)
+                  .onTapGesture {
+                    spaceToDelete = space
+                  }
+              }
             }
+            .buttonStyle(PlainButtonStyle())
+            .cornerRadius(8)
+            .padding(.vertical, 4)
           }
         }
       }
@@ -46,6 +68,29 @@ struct ContentView: View {
         }
     }
     .frame(minWidth: 1000, minHeight: 600)
+    .confirmationDialog(
+      "Are you sure you want to delete \((spaceToDelete != nil) ? spaceToDelete!.name : "this space")?",
+      isPresented: Binding(
+        get: { spaceToDelete != nil },
+        set: { if !$0 { spaceToDelete = nil } }
+      ),
+      titleVisibility: .visible
+    ) {
+      Button("Delete", role: .none) {
+        if let space = spaceToDelete {
+          let index = appService.spaceList.data.firstIndex {
+            $0.id == space.id
+          }
+          if index != nil {
+            appService.deleteSpace(at: index!)
+          }
+        }
+        spaceToDelete = nil
+      }
+      Button("Cancel", role: .cancel) {
+        spaceToDelete = nil
+      }
+    }
   }
 }
 
