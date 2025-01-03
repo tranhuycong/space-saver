@@ -1,6 +1,6 @@
 import Foundation
 
-struct SpaceInfo: Identifiable, Codable {
+struct SpaceInfo: Identifiable, Codable, Hashable {
     var id = UUID()
     var name: String
     var windowList: [WindowInfo]

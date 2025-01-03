@@ -22,6 +22,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 		// Add firebase configuration
 		FirebaseApp.configure()
 
+		// Set the app to always use dark mode
+		NSApp.appearance = NSAppearance(named: .darkAqua)
+
 		statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 		if let button = statusItem?.button {
 			button.image = NSImage(
@@ -44,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 		// Create window if it doesn't exist
 		if window == nil {
 			window = NSWindow(
-				contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
+				contentRect: NSRect(x: 0, y: 0, width: 1000, height: 800),
 				styleMask: [.titled, .closable, .miniaturizable, .resizable],
 				backing: .buffered,
 				defer: false

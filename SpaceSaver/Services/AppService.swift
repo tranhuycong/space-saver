@@ -22,7 +22,6 @@ class AppService: ObservableObject {
 
   func setupWindowChangeObserver() {
     let notifications: [NSNotification.Name] = [
-      NSWindow.didBecomeKeyNotification,
       NSApplication.didBecomeActiveNotification
     ]
 
@@ -77,7 +76,6 @@ class AppService: ObservableObject {
   }
 
   func getAllOpenWindows() {
-    let workspace = NSWorkspace.shared
     let options: CGWindowListOption = [.excludeDesktopElements, .optionOnScreenOnly]
 
     // Get main screen dimensions
