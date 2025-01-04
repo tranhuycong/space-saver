@@ -10,9 +10,9 @@ import Sparkle
 import SwiftUI
 import FirebaseCore
 
-class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
-
-	var window: NSWindow?
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, SPUUpdaterDelegate {
+	private var window: NSWindow?
+	private var windowController: NSWindowController?
 	var statusItem: NSStatusItem?
 	let updaterController = SPUStandardUpdaterController(
 		startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
@@ -44,23 +44,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 	}
 
 	@objc func openAction() {
-		// Create window if it doesn't exist
-		if window == nil {
-			window = NSWindow(
-				contentRect: NSRect(x: 0, y: 0, width: 1000, height: 800),
-				styleMask: [.titled, .closable, .miniaturizable, .resizable],
-				backing: .buffered,
-				defer: false
-			)
-			window?.center()
-			window?.contentView = NSHostingView(rootView: ContentView())
-			window?.title = "Space Saver"
+		DispatchQueue.main.async {
+			// Change from accessory to regular app mode
+			NSApp.setActivationPolicy(.regular)
+			
+			// Create and configure window if needed
+			if self.windowController == nil {
+				let window = NSWindow(
+					contentRect: NSRect(x: 0, y: 0, width: 1000, height: 800),
+					styleMask: [.titled, .closable, .miniaturizable, .resizable],
+					backing: .buffered,
+					defer: false
+				)
+				window.center()
+				window.title = "Space Saver"
+				window.contentView = NSHostingView(rootView: ContentView())
+				
+				// Create window controller to manage window lifecycle
+				self.windowController = NSWindowController(window: window)
+				
+				// Set window close handler
+				window.delegate = self
+			}
+			
+			self.windowController?.showWindow(nil)
+			NSApp.activate(ignoringOtherApps: true)
 		}
-
-		// Make app active and show window
-		NSApp.setActivationPolicy(.regular)
-		NSApp.activate(ignoringOtherApps: true)
-		window?.makeKeyAndOrderFront(nil)
 	}
 
 	@objc func quitAction() {
@@ -73,6 +82,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 	func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
 		NSApp.setActivationPolicy(.accessory)
 		return false
+	}
+
+	func windowWillClose(_ notification: Notification) {
+		windowController = nil
+		NSApp.setActivationPolicy(.accessory)
 	}
 
 }
