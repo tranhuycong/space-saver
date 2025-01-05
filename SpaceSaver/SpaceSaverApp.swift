@@ -30,6 +30,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, SPUUpdater
 			button.image = NSImage(
 				systemSymbolName: "rectangle.3.group.fill", accessibilityDescription: "Space Saver")
 		}
+
+		 NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(updateMenu),
+			name: NSNotification.Name("SpaceListUpdated"),
+			object: nil
+    )
+    
 		constructMenu()
 	}
 
@@ -38,9 +46,35 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, SPUUpdater
 
 		menu.addItem(NSMenuItem(title: "Open", action: #selector(openAction), keyEquivalent: "O"))
 		menu.addItem(NSMenuItem.separator())
+		// Add submenu for spaces
+    if !AppService.shared.spaceList.data.isEmpty {
+			let spacesMenu = NSMenu()
+			for space in AppService.shared.spaceList.data {
+				let item = NSMenuItem(title: space.name, action: #selector(launchSpace(_:)), keyEquivalent: "")
+				item.representedObject = space
+				spacesMenu.addItem(item)
+			}
+			
+			let spacesItem = NSMenuItem(title: "Launch Space", action: nil, keyEquivalent: "")
+			spacesItem.submenu = spacesMenu
+			menu.addItem(spacesItem)
+			menu.addItem(NSMenuItem.separator())
+    }
+
 		menu.addItem(NSMenuItem(title: "Quit", action: #selector(quitAction), keyEquivalent: "Q"))
 
 		statusItem?.menu = menu
+	}
+
+	@objc func launchSpace(_ sender: NSMenuItem) {
+    if let space = sender.representedObject as? SpaceInfo,
+			let index = AppService.shared.spaceList.data.firstIndex(where: { $0.id == space.id }) {
+			AppService.shared.openSpace(at: index)
+    }
+	}
+	
+	@objc func updateMenu() {
+    constructMenu()
 	}
 
 	@objc func openAction() {

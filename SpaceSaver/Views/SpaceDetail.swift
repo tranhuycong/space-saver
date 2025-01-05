@@ -9,6 +9,8 @@ struct SpaceDetail: View {
   @State private var editedName: String
   @State private var desktopImage: NSImage?
 
+  @FocusState private var isFocused: Bool
+
   init(space: SpaceInfo) {
     self.space = space
     _editedName = State(initialValue: space.name)
@@ -21,6 +23,13 @@ struct SpaceDetail: View {
           TextField("Space Name", text: $editedName)
           .font(.largeTitle)
           .padding(.bottom, 10)
+          .focused($isFocused)
+          .onSubmit(saveName)
+          .onChange(of: isFocused) { focused in
+            if !focused {
+              saveName()
+            }
+          }
           .onSubmit {
               isEditing = false
               // Save the new name
@@ -64,16 +73,17 @@ struct SpaceDetail: View {
     .padding()
     .navigationTitle(space.name)
     .onAppear {
-      desktopImage = getCurrentDesktopImage()
+      desktopImage = appService.getCurrentDesktopImage()
     }
   }
 
-  private func getCurrentDesktopImage() -> NSImage? {
-    guard let screen = NSScreen.main,
-          let imageURL = NSWorkspace.shared.desktopImageURL(for: screen),
-          let desktopImage = NSImage(contentsOf: imageURL) else {
-        return NSImage(named: "SequoiaLight")
+  private func saveName() {
+    isEditing = false
+    if let index = appService.spaceList.data.firstIndex(where: {
+      $0.id == space.id
+    }) {
+      appService.spaceList.data[index].name = editedName
+      UserDefaultsHelper.spaceList = appService.spaceList
     }
-    return desktopImage
   }
 }

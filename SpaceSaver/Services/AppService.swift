@@ -132,6 +132,8 @@ class AppService: ObservableObject {
 
     spaceList.data.insert(spaceInfo, at: 0)
     UserDefaultsHelper.spaceList = spaceList
+
+    NotificationCenter.default.post(name: NSNotification.Name("SpaceListUpdated"), object: nil)
   }
 
   func openAppAtPosition(appName: String, bounds: [CGFloat]) {
@@ -232,6 +234,15 @@ class AppService: ObservableObject {
       }
     }
     return nil
+  }
+
+  func getCurrentDesktopImage() -> NSImage? {
+    guard let screen = NSScreen.main,
+        let imageURL = NSWorkspace.shared.desktopImageURL(for: screen),
+        let desktopImage = NSImage(contentsOf: imageURL) else {
+      return NSImage(named: "SequoiaLight")
+    }
+    return desktopImage
   }
 
 }

@@ -48,16 +48,7 @@ struct SpacePreview: View {
     }
     .navigationTitle(space.name)
     .onAppear {
-      desktopImage = getCurrentDesktopImage()
+      desktopImage = appService.getCurrentDesktopImage()
     }
-  }
-
-  private func getCurrentDesktopImage() -> NSImage? {
-    guard let screen = NSScreen.main,
-          let imageURL = NSWorkspace.shared.desktopImageURL(for: screen),
-          let desktopImage = NSImage(contentsOf: imageURL) else {
-        return NSImage(named: "SequoiaLight")
-    }
-    return desktopImage
   }
 }

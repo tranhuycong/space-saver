@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
   @StateObject private var appService = AppService.shared
+  @State private var desktopImage: NSImage?
 
   var body: some View {
     ScrollView {
@@ -53,6 +54,16 @@ struct HomeView: View {
             appService.saveToSpaceList()
           }
         }.padding(.top, 10)
+        ZStack {
+            Image(nsImage: desktopImage ?? NSImage(named: "SequoiaLight")!)
+            .resizable()
+            .aspectRatio(16/9, contentMode: .fit)
+            .cornerRadius(20)
+            .edgesIgnoringSafeArea(.all)
+          ForEach(appService.spaceInfo.windowList, id: \.id) { window in
+            AppWidget(window: window)
+          }
+        }
         ScrollView(.horizontal) {
           HStack {
             ForEach(appService.spaceInfo.windowList) { windowInfo in
@@ -176,6 +187,7 @@ struct HomeView: View {
       .onAppear {
         appService.getSpaceList()
         appService.getAllOpenWindows()
+        desktopImage = appService.getCurrentDesktopImage()
       }
     }
   }
