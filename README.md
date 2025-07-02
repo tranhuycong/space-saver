@@ -36,7 +36,7 @@ brew install --cask spacesaver
 We welcome contributions to improve SpaceSaver. If you have any suggestions or find any issues, please open an issue or submit a pull request on our [GitHub repository](https://github.com/tranhuycong/space-saver).
 
 ## License
-This project is licensed under the MIT License. See the LICENSE (link to LICENSE file) file for more details.
+This project is licensed under the [GPLv2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) License.
 
 ## Contact
 For any questions or support, please contact us at [congtranit@gmail.com](mailto:congtranit@gmail.com).
