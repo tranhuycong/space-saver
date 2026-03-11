@@ -20,10 +20,9 @@ brew install --cask spacesaver
 ```
 
 ### Manual Installation
-1. **Download the App**: [Download SpaceSaver](https://github.com/tranhuycong/space-saver/releases/latest/download/SpaceSaver-Installer.dmg)
+1. **Download the App**: [Download SpaceSaver]([https://github.com/tranhuycong/space-saver/releases/latest/download/SpaceSaver-Installer.dmg](https://congtran4.gumroad.com/l/space-saver))
 2. **Open the App**: Locate the downloaded file and open it to start the installation process.
 3. **Follow the Instructions**: Follow the on-screen instructions to complete the installation.
-4. **All Releases**: [All release versions](https://github.com/tranhuycong/space-saver/releases/)
 
 ## Usage
 1. **Launch SpaceSaver**: Open the SpaceSaver app from your Applications folder.
